@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404: Friends Not Found at Office ❤️</title>
+<style>
+:root {
+  --bg: #09090f;
+  --bg2: #0d0d1a;
+  --card: rgba(255,255,255,0.05);
+  --card-h: rgba(255,255,255,0.09);
+  --purple: #b66dff;
+  --blue: #4d9fff;
+  --pink: #ff6eb4;
+  --cyan: #00d4ff;
+  --gold: #ffd700;
+  --green: #28c840;
+  --txt: #ffffff;
+  --txt2: #a0a0c0;
+  --txt3: #606080;
+  --border: rgba(255,255,255,0.1);
+  --mono: 'Courier New', Courier, monospace;
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --r: 16px;
+  --ease: 0.3s ease;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--txt);
+  font-family: var(--sans);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}
+
+/* ── layout ── */
+#stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: .6; }
+.sec { position: relative; z-index: 1; padding: 80px 24px; }
+.wrap { max-width: 1100px; margin: 0 auto; }
+
+/* ── typography ── */
+.sec-title {
+  font-size: clamp(1.8rem,4vw,2.8rem);
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, var(--purple), var(--blue));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.sec-sub {
+  text-align: center;
+  color: var(--txt2);
+  font-size: clamp(.9rem,2vw,1.1rem);
+  margin-bottom: 56px;
+  max-width: 600px;
+  margin-left: auto; margin-right: auto;
+}
+
+/* ── glass card ── */
+.glass {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform var(--ease), box-shadow var(--ease), background var(--ease);
+}
+.glass:hover { background: var(--card-h); transform: translateY(-4px); }
+
+/* ── buttons ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 28px; border: none; border-radius: 50px;
+  font-size: 1rem; font-weight: 600; cursor: pointer;
+  transition: all var(--ease); font-family: var(--sans); text-decoration: none;
+}
+.btn-p  { background: linear-gradient(135deg,var(--purple),var(--blue)); color:#fff; box-shadow:0 4px 24px rgba(182,109,255,.3); }
+.btn-p:hover  { transform:translateY(-2px); box-shadow:0 8px 32px rgba(182,109,255,.5); }
+.btn-pk { background: linear-gradient(135deg,var(--pink),var(--purple)); color:#fff; box-shadow:0 4px 24px rgba(255,110,180,.3); }
+.btn-pk:hover { transform:translateY(-2px); box-shadow:0 8px 32px rgba(255,110,180,.5); }
+.btn-o  { background:transparent; border:2px solid var(--purple); color:var(--purple); }
+.btn-o:hover  { background:rgba(182,109,255,.15); transform:translateY(-2px); }
+
+/* ── section reveal ── */
+.hidden-sec { opacity:0; transform:translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+.show-sec   { opacity:1; transform:translateY(0); }
+
+/* ═══════════════════ HERO ═══════════════════ */
+#hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; padding: 40px 24px;
+}
+
+.term-win {
+  background: #0e0e1a;
+  border: 1px solid rgba(182,109,255,.3);
+  border-radius: 12px;
+  width: 100%; max-width: 680px;
+  margin-bottom: 40px;
+  box-shadow: 0 0 40px rgba(182,109,255,.15);
+  overflow: hidden;
+}
+.term-hdr {
+  background: #1a1a2e; padding: 12px 16px;
+  display: flex; align-items: center; gap: 8px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.tdot { width:12px; height:12px; border-radius:50%; }
+.tr { background:#ff5f57; } .ty { background:#febc2e; } .tg { background:#28c840; }
+.tname { margin-left:8px; color:var(--txt3); font-family:var(--mono); font-size:.8rem; }
+
+.term-body {
+  padding: 24px; font-family: var(--mono);
+  font-size: clamp(.75rem,2vw,.9rem);
+  line-height: 1.8; min-height: 200px; text-align: left;
+}
+.tl { display:block; }
+.tl.cmd   { color:var(--cyan); }
+.tl.ok    { color:var(--green); }
+.tl.err   { color:#ff5f57; }
+.tl.warn  { color:var(--gold); }
+.tl.info  { color:var(--txt2); }
+.tl.final { color:var(--purple); font-weight:600; }
+
+.cur {
+  display:inline-block; width:8px; height:1.1em;
+  background:var(--cyan); vertical-align:text-bottom;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink { 50%{opacity:0;} }
+
+#hero-content { opacity:0; transform:translateY(20px); transition: all .8s ease; }
+.hero-title {
+  font-size: clamp(2.2rem,6vw,4rem); font-weight:900; line-height:1.1; margin-bottom:16px;
+  background: linear-gradient(135deg,var(--purple) 0%,var(--blue) 50%,var(--pink) 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+.hero-sub { font-size:clamp(1rem,2.5vw,1.3rem); color:var(--txt2); margin-bottom:48px; max-width:500px; }
+
+.avatars { display:flex; gap:32px; justify-content:center; margin-bottom:48px; flex-wrap:wrap; }
+.av { display:flex; flex-direction:column; align-items:center; gap:12px; }
+.av-ring {
+  width:90px; height:90px; border-radius:50%; padding:3px;
+  background: linear-gradient(135deg,var(--purple),var(--blue));
+  animation: pulse 3s ease-in-out infinite;
+}
+.av-ring.pink { background: linear-gradient(135deg,var(--pink),var(--purple)); animation-delay:1.5s; }
+.av-inner {
+  width:100%; height:100%; border-radius:50%;
+  background: linear-gradient(135deg,#1a1a2e,#0d0d1a);
+  display:flex; align-items:center; justify-content:center; font-size:2.2rem;
+}
+.av-name { font-weight:700; font-size:1rem; }
+.av-role { font-size:.8rem; color:var(--txt3); font-family:var(--mono); }
+@keyframes pulse {
+  0%,100%{box-shadow:0 0 0 0 rgba(182,109,255,.4);}
+  50%{box-shadow:0 0 0 12px rgba(182,109,255,0);}
+}
+
+/* ═══════════════════ PROFILES ═══════════════════ */
+.profiles-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:32px; }
+.card-wrap { perspective:1000px; height:480px; }
+.card-inner {
+  position:relative; width:100%; height:100%;
+  transform-style:preserve-3d;
+  transition:transform .7s cubic-bezier(.4,0,.2,1);
+}
+.card-wrap.flipped .card-inner { transform:rotateY(180deg); }
+.card-f, .card-b {
+  position:absolute; width:100%; height:100%;
+  backface-visibility:hidden; -webkit-backface-visibility:hidden;
+  border-radius:var(--r); padding:32px;
+  display:flex; flex-direction:column;
+}
+.card-f {
+  background:var(--card); border:1px solid var(--border);
+  backdrop-filter:blur(12px);
+}
+.card-b {
+  background: linear-gradient(135deg,rgba(182,109,255,.15),rgba(77,159,255,.15));
+  border:1px solid rgba(182,109,255,.3);
+  transform:rotateY(180deg);
+  justify-content:center; align-items:center; text-align:center;
+}
+.card-b.pink-b {
+  background: linear-gradient(135deg,rgba(255,110,180,.15),rgba(182,109,255,.15));
+  border-color:rgba(255,110,180,.3);
+}
+
+.p-hdr { display:flex; align-items:center; gap:16px; margin-bottom:24px; }
+.p-av {
+  width:64px; height:64px; border-radius:50%; flex-shrink:0;
+  background:linear-gradient(135deg,var(--purple),var(--blue));
+  display:flex; align-items:center; justify-content:center; font-size:1.8rem;
+}
+.p-av.pink-av { background:linear-gradient(135deg,var(--pink),var(--purple)); }
+.p-name { font-size:1.4rem; font-weight:800; }
+.p-role { font-size:.85rem; color:var(--cyan); font-family:var(--mono); }
+.p-role.pink-r { color:var(--pink); }
+
+.badge {
+  display:inline-flex; align-items:center; gap:6px;
+  background:rgba(40,200,64,.15); border:1px solid rgba(40,200,64,.3);
+  border-radius:50px; padding:4px 12px;
+  font-size:.75rem; color:var(--green); font-family:var(--mono); margin-bottom:20px;
+}
+.badge.pink { background:rgba(255,110,180,.1); border-color:rgba(255,110,180,.3); color:var(--pink); }
+.bdot { width:6px; height:6px; border-radius:50%; background:var(--green); animation:blink 1s step-end infinite; }
+.bdot.pink { background:var(--pink); }
+
+.stats { display:grid; gap:10px; flex:1; }
+.stat-row {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:10px 14px; background:rgba(255,255,255,.04);
+  border-radius:8px; border:1px solid rgba(255,255,255,.06); font-size:.85rem;
+}
+.s-lbl { color:var(--txt2); font-family:var(--mono); }
+.s-val { color:var(--purple); font-weight:600; font-family:var(--mono); }
+.s-val.pink { color:var(--pink); }
+
+.flip-hint { text-align:center; margin-top:20px; color:var(--txt3); font-size:.8rem; font-family:var(--mono); }
+.back-msg { font-size:1.1rem; line-height:1.7; color:var(--txt); margin-bottom:24px; }
+.back-btn {
+  background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2);
+  color:#fff; padding:10px 24px; border-radius:50px;
+  cursor:pointer; font-family:var(--sans); font-size:.9rem; transition:all var(--ease);
+}
+.back-btn:hover { background:rgba(255,255,255,.2); }
+
+/* ═══════════════════ AWARDS ═══════════════════ */
+.aw-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:24px; margin-bottom:24px; }
+.aw-card {
+  padding:28px 24px; border-radius:var(--r);
+  border:1px solid var(--border); background:var(--card);
+  text-align:center; cursor:pointer; transition:all var(--ease);
+  position:relative; overflow:hidden;
+}
+.aw-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg,var(--purple),var(--blue));
+}
+.aw-card.pink::before { background:linear-gradient(90deg,var(--pink),var(--purple)); }
+.aw-card.shared::before { background:linear-gradient(90deg,var(--pink),var(--purple),var(--blue)); }
+.aw-card:hover { transform:translateY(-6px); box-shadow:0 12px 40px rgba(182,109,255,.2); border-color:rgba(182,109,255,.4); }
+
+.aw-lbl {
+  position:absolute; top:12px; right:12px; font-size:.7rem;
+  padding:3px 8px; border-radius:50px; font-family:var(--mono); font-weight:600;
+}
+.lbl-r { background:rgba(77,159,255,.2); border:1px solid rgba(77,159,255,.4); color:var(--blue); }
+.lbl-u { background:rgba(255,110,180,.2); border:1px solid rgba(255,110,180,.4); color:var(--pink); }
+.lbl-s { background:rgba(182,109,255,.2); border:1px solid rgba(182,109,255,.4); color:var(--purple); }
+
+.aw-icon { font-size:2.5rem; margin-bottom:16px; display:block; }
+.aw-title { font-size:1rem; font-weight:700; margin-bottom:8px; }
+.aw-desc { font-size:.85rem; color:var(--txt2); line-height:1.5; margin-bottom:16px; }
+.aw-btn {
+  background:linear-gradient(135deg,var(--purple),var(--blue));
+  border:none; border-radius:50px; padding:8px 20px;
+  color:#fff; font-size:.8rem; font-weight:600; cursor:pointer;
+  font-family:var(--sans); transition:all var(--ease);
+}
+.aw-btn:hover { transform:scale(1.05); }
+.aw-msg {
+  display:none; font-size:.85rem; color:var(--cyan); font-family:var(--mono);
+  margin-top:12px; padding:10px;
+  background:rgba(0,212,255,.08); border-radius:8px; border:1px solid rgba(0,212,255,.2);
+}
+.aw-msg.show { display:block; animation:fiu .4s ease; }
+
+.aw-label {
+  font-size:1.2rem; font-weight:700; text-align:center;
+  margin:40px 0 24px; font-family:var(--mono); color:var(--txt2);
+}
+.aw-label .hi { color:var(--blue); }
+.aw-label .hip { color:var(--pink); }
+
+.shared-wrap { max-width:500px; margin:0 auto; }
+
+/* ═══════════════════ MEMORY WALL ═══════════════════ */
+.mem-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:24px; }
+.mem-card {
+  border-radius:var(--r); overflow:hidden; cursor:pointer;
+  position:relative; border:1px solid var(--border); transition:all var(--ease);
+}
+.mem-card:hover { transform:scale(1.03); box-shadow:0 16px 48px rgba(182,109,255,.2); }
+.mem-img-box { width:100%; height:200px; position:relative; overflow:hidden; }
+.mem-img-box img { width:100%; height:100%; object-fit:cover; transition:transform .5s ease; }
+.mem-card:hover .mem-img-box img { transform:scale(1.08); }
+.mem-ph {
+  width:100%; height:100%;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px;
+}
+.mem-ph-icon { font-size:2.5rem; }
+.mem-ph-txt { font-family:var(--mono); font-size:.75rem; }
+.mem-cap { padding:16px; background:var(--card); }
+.mem-cap-txt { font-size:.9rem; color:var(--txt2); line-height:1.5; }
+.mem-date { font-size:.75rem; color:var(--txt3); font-family:var(--mono); margin-top:6px; }
+
+/* lightbox */
+.lbox {
+  position:fixed; inset:0; background:rgba(0,0,0,.92);
+  display:none; align-items:center; justify-content:center; z-index:1000; padding:24px;
+}
+.lbox.open { display:flex; }
+.lbox-close {
+  position:absolute; top:24px; right:24px; background:rgba(255,255,255,.1);
+  border:none; color:#fff; width:44px; height:44px; border-radius:50%;
+  font-size:1.2rem; cursor:pointer; transition:background var(--ease);
+}
+.lbox-close:hover { background:rgba(255,255,255,.2); }
+.lbox-inner { max-width:800px; width:100%; text-align:center; }
+.lbox-img { max-height:70vh; width:100%; object-fit:contain; border-radius:12px; margin-bottom:16px; }
+.lbox-cap { color:var(--txt2); font-size:1rem; }
+
+/* ═══════════════════ FRIENDSHIP API ═══════════════════ */
+.api-wrap { max-width:700px; margin:0 auto; text-align:center; }
+.api-term {
+  background:#0a0f14; border:1px solid rgba(0,212,255,.3);
+  border-radius:12px; padding:28px; margin:32px 0; text-align:left;
+  font-family:var(--mono); font-size:clamp(.8rem,2vw,.95rem);
+  box-shadow:0 0 40px rgba(0,212,255,.1); display:none;
+}
+.aj { display:block; opacity:0; color:var(--txt2); line-height:1.8; transition:opacity .3s ease; }
+.aj.show { opacity:1; }
+.ak { color:var(--cyan); }
+.as { color:#98c379; }
+.ab { color:#e06c75; }
+.ap { color:var(--txt3); }
+
+.api-msg {
+  display:none; text-align:left; margin-top:32px;
+  background:rgba(182,109,255,.08); border:1px solid rgba(182,109,255,.2);
+  border-radius:12px; padding:28px; animation:fiu .6s ease;
+}
+.api-msg.show { display:block; }
+.api-msg p { color:var(--txt2); line-height:1.8; margin-bottom:16px; font-size:1rem; }
+.api-hl {
+  font-size:1.1rem; font-weight:700; color:var(--purple);
+  text-align:center; display:block; margin-top:24px;
+  animation:glow 2s ease-in-out infinite;
+}
+@keyframes glow {
+  0%,100%{text-shadow:0 0 10px rgba(182,109,255,.5);}
+  50%{text-shadow:0 0 30px rgba(182,109,255,.9);}
+}
+
+/* ═══════════════════ UNNATI ═══════════════════ */
+#sec-unnati {
+  background: linear-gradient(135deg,rgba(255,110,180,.05),rgba(182,109,255,.05),rgba(77,159,255,.05));
+}
+.un-wrap { max-width:700px; margin:0 auto; text-align:center; }
+.un-title {
+  font-size:clamp(1.8rem,4vw,2.8rem); font-weight:800; margin-bottom:12px;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+.un-sub { color:var(--txt3); font-family:var(--mono); font-size:.9rem; margin-bottom:48px; }
+.un-card {
+  background:linear-gradient(135deg,rgba(255,110,180,.08),rgba(182,109,255,.08));
+  border:1px solid rgba(255,110,180,.2); border-radius:20px;
+  padding:40px; text-align:left; position:relative; overflow:hidden;
+}
+.un-card::before {
+  content:'"'; position:absolute; top:-20px; left:20px;
+  font-size:120px; color:rgba(255,110,180,.1);
+  font-family:Georgia,serif; line-height:1; pointer-events:none;
+}
+.un-card p { font-size:1.05rem; line-height:1.85; color:var(--txt2); margin-bottom:20px; position:relative; }
+.un-card p:last-child { margin-bottom:0; }
+.orb {
+  position:absolute; border-radius:50%; filter:blur(60px); pointer-events:none;
+}
+.orb1 { width:200px; height:200px; background:rgba(255,110,180,.15); top:-50px; right:-50px; }
+.orb2 { width:150px; height:150px; background:rgba(182,109,255,.15); bottom:-30px; left:-30px; }
+
+/* ═══════════════════ FINAL COMMIT ═══════════════════ */
+#sec-final {
+  min-height:100vh; display:flex; align-items:center; justify-content:center;
+  background:radial-gradient(ellipse at center,rgba(182,109,255,.08) 0%,transparent 70%);
+}
+.fin-wrap { max-width:800px; margin:0 auto; text-align:center; padding:40px 24px; }
+
+.com-term {
+  background:#080d12; border:1px solid rgba(40,200,64,.3);
+  border-radius:12px; padding:28px; margin-bottom:48px; text-align:left;
+  font-family:var(--mono); font-size:clamp(.8rem,2vw,.9rem);
+  box-shadow:0 0 40px rgba(40,200,64,.1);
+}
+.cl { display:block; line-height:1.8; opacity:0; transition:opacity .3s ease; }
+.cl.show  { opacity:1; }
+.cl.pr    { color:var(--green); }
+.cl.me    { color:var(--txt3); }
+.cl.add   { color:var(--green); }
+.cl.rem   { color:#e06c75; }
+.cl.win   { color:var(--gold); font-weight:600; }
+
+.fin-title {
+  font-size:clamp(2rem,5vw,3.5rem); font-weight:900; margin-bottom:40px;
+  background:linear-gradient(135deg,var(--purple),var(--pink),var(--gold));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+.fin-msg {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:20px; padding:40px; text-align:left; margin-bottom:48px;
+}
+.fin-msg p { font-size:1.05rem; line-height:1.85; color:var(--txt2); margin-bottom:20px; }
+.fin-msg p:last-child { margin-bottom:0; }
+
+.fin-hl {
+  font-size:clamp(1.5rem,4vw,2.2rem); font-weight:900; text-align:center; margin:48px 0;
+  background:linear-gradient(135deg,var(--purple),var(--blue));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+
+.act-btns { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:40px; }
+
+/* ═══════════════════ FOOTER ═══════════════════ */
+footer {
+  padding:60px 24px 40px; text-align:center;
+  border-top:1px solid var(--border); position:relative; z-index:1;
+}
+.ft-built { font-family:var(--mono); color:var(--txt3); font-size:.85rem; margin-bottom:8px; }
+.ft-for {
+  font-size:1.1rem; font-weight:700; margin-bottom:32px;
+  background:linear-gradient(135deg,var(--purple),var(--pink));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+.ft-stats { display:flex; justify-content:center; gap:32px; flex-wrap:wrap; margin-bottom:32px; }
+.ft-stat { display:flex; flex-direction:column; align-items:center; gap:4px; }
+.ft-lbl { font-family:var(--mono); font-size:.7rem; color:var(--txt3); text-transform:uppercase; letter-spacing:1px; }
+.ft-val { font-family:var(--mono); font-size:.9rem; color:var(--cyan); }
+
+.share-box {
+  margin:32px auto; padding:24px; background:var(--card);
+  border:1px solid var(--border); border-radius:12px; max-width:500px;
+}
+.share-title { font-size:1rem; font-weight:600; margin-bottom:8px; }
+.share-note { font-size:.8rem; color:var(--txt3); margin-bottom:16px; font-family:var(--mono); }
+.share-toast {
+  display:none; background:rgba(40,200,64,.15); border:1px solid rgba(40,200,64,.3);
+  border-radius:8px; padding:10px; font-size:.85rem; color:var(--green);
+  margin-top:12px; font-family:var(--mono);
+}
+.share-toast.show { display:block; }
+
+/* ═══════════════════ FX ═══════════════════ */
+@keyframes fiu { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
+.heart-p {
+  position:fixed; pointer-events:none; z-index:9999;
+  animation:hfly 1.5s ease-out forwards;
+}
+@keyframes hfly {
+  0%{opacity:1;transform:translateY(0) scale(1);}
+  100%{opacity:0;transform:translateY(-150px) scale(.5);}
+}
+.conf-p {
+  position:fixed; width:10px; height:10px; border-radius:2px;
+  pointer-events:none; z-index:9999;
+  animation:cfall linear forwards;
+}
+@keyframes cfall {
+  0%{transform:translateY(-20px) rotate(0deg);opacity:1;}
+  100%{transform:translateY(110vh) rotate(720deg);opacity:0;}
+}
+
+/* nav dots */
+.nav-dots {
+  position:fixed; right:20px; top:50%; transform:translateY(-50%);
+  display:flex; flex-direction:column; gap:12px; z-index:100;
+}
+.nd {
+  width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,.2);
+  cursor:pointer; transition:all var(--ease); border:none;
+}
+.nd.on, .nd:hover { background:var(--purple); transform:scale(1.4); }
+@media(max-width:768px){ .nav-dots{display:none;} }
+
+/* responsive */
+@media(max-width:600px){
+  .sec{padding:60px 16px;}
+  .act-btns{flex-direction:column;align-items:center;}
+  .act-btns .btn{width:100%;max-width:300px;justify-content:center;}
+  .ft-stats{gap:20px;}
+  .un-card{padding:28px 20px;}
+  .fin-msg{padding:24px 20px;}
+  .card-wrap{height:520px;}
+}
+
+#dl-canvas{display:none;}
+</style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+
+<nav class="nav-dots" aria-label="Page navigation">
+  <button class="nd on"  data-s="hero"        title="Home"></button>
+  <button class="nd"     data-s="sec-profiles" title="The Legends"></button>
+  <button class="nd"     data-s="sec-awards"   title="Awards"></button>
+  <button class="nd"     data-s="sec-memories" title="Memories"></button>
+  <button class="nd"     data-s="sec-api"      title="Friendship API"></button>
+  <button class="nd"     data-s="sec-unnati"   title="For Unnati"></button>
+  <button class="nd"     data-s="sec-final"    title="Final Commit"></button>
+</nav>
+
+<!-- ═══════ HERO ═══════ -->
+<section id="hero" class="sec">
+  <div class="term-win">
+    <div class="term-hdr">
+      <span class="tdot tr"></span>
+      <span class="tdot ty"></span>
+      <span class="tdot tg"></span>
+      <span class="tname">farewell.exe — bash</span>
+    </div>
+    <div class="term-body" id="term-body">
+      <span class="cur" id="tcur"></span>
+    </div>
+  </div>
+
+  <div id="hero-content">
+    <h1 class="hero-title">404: Friends Not Found at Office</h1>
+    <p class="hero-sub">Some people join your team. Some people become your people.</p>
+
+    <div class="avatars">
+      <div class="av">
+        <div class="av-ring"><div class="av-inner">👨‍💻</div></div>
+        <span class="av-name">Rushikesh</span>
+        <span class="av-role">$ legendary.teammate</span>
+      </div>
+      <div class="av">
+        <div class="av-ring pink"><div class="av-inner">👩‍💻</div></div>
+        <span class="av-name">Unnati</span>
+        <span class="av-role">$ irreplaceable.friend</span>
+      </div>
+    </div>
+
+    <button class="btn btn-p" id="start-btn" style="font-size:1.1rem;padding:16px 36px;">
+      🚀 INITIATE FAREWELL EXPERIENCE
+    </button>
+  </div>
+</section>
+
+<!-- ═══════ PROFILES ═══════ -->
+<section id="sec-profiles" class="sec hidden-sec">
+  <div class="wrap">
+    <h2 class="sec-title">MEET THE LEGENDS</h2>
+    <p class="sec-sub">System status: Two exceptional humans, offline from this office — but never from our lives.</p>
+    <div class="profiles-grid">
+
+      <!-- Rushikesh -->
+      <div class="card-wrap" id="cw-r">
+        <div class="card-inner">
+          <div class="card-f">
+            <div class="p-hdr">
+              <div class="p-av">👨‍💻</div>
+              <div>
+                <div class="p-name">Rushikesh</div>
+                <div class="p-role">$ developer.legendary_teammate</div>
+              </div>
+            </div>
+            <div class="badge"><span class="bdot"></span>Preparing for next adventure</div>
+            <div class="stats">
+              <div class="stat-row"><span class="s-lbl">Friendship Uptime</span><span class="s-val">∞ UNLIMITED</span></div>
+              <div class="stat-row"><span class="s-lbl">Office Availability</span><span class="s-val">ENDING TODAY</span></div>
+              <div class="stat-row"><span class="s-lbl">Bug-Fixing Memories</span><span class="s-val">COUNTLESS</span></div>
+              <div class="stat-row"><span class="s-lbl">Team Contribution</span><span class="s-val">IRREPLACEABLE</span></div>
+              <div class="stat-row"><span class="s-lbl">Loyalty Index</span><span class="s-val">100%</span></div>
+            </div>
+            <div class="flip-hint">[ Click card to reveal message ]</div>
+          </div>
+          <div class="card-b">
+            <!-- EDITABLE: Rushikesh back message -->
+            <p class="back-msg">"New company, new challenges, new bugs. But don't think you can escape our friendship that easily! 😂"</p>
+            <button class="back-btn" onclick="flip('cw-r',event)">↩ Flip back</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unnati -->
+      <div class="card-wrap" id="cw-u">
+        <div class="card-inner">
+          <div class="card-f">
+            <div class="p-hdr">
+              <div class="p-av pink-av">👩‍💻</div>
+              <div>
+                <div class="p-name">Unnati</div>
+                <div class="p-role pink-r">$ developer.close_friend</div>
+              </div>
+            </div>
+            <div class="badge pink"><span class="bdot pink"></span>Preparing for next adventure</div>
+            <div class="stats">
+              <div class="stat-row"><span class="s-lbl">Friendship Uptime</span><span class="s-val pink">∞ UNLIMITED</span></div>
+              <div class="stat-row"><span class="s-lbl">Office Availability</span><span class="s-val pink">ENDING TODAY</span></div>
+              <div class="stat-row"><span class="s-lbl">Sister-Like Bond</span><span class="s-val pink">PRICELESS</span></div>
+              <div class="stat-row"><span class="s-lbl">Team Contribution</span><span class="s-val pink">IRREPLACEABLE</span></div>
+              <div class="stat-row"><span class="s-lbl">Warmth & Care</span><span class="s-val pink">MAXED OUT</span></div>
+            </div>
+            <div class="flip-hint">[ Click card to reveal message ]</div>
+          </div>
+          <div class="card-b pink-b">
+            <!-- EDITABLE: Unnati back message -->
+            <p class="back-msg">"Some people start as colleagues and become family. No job change can change that. ❤️"</p>
+            <button class="back-btn" onclick="flip('cw-u',event)">↩ Flip back</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ AWARDS ═══════ -->
+
+
+<!-- ═══════ MEMORY WALL ═══════ -->
+<section id="sec-memories" class="sec hidden-sec">
+  <div class="wrap">
+    <h2 class="sec-title">MEMORIES WE DIDN'T KNOW WOULD MEAN THIS MUCH</h2>
+    <p class="sec-sub">The best moments were never part of any sprint plan.</p>
+    <div class="mem-grid" id="mem-grid"></div>
+  </div>
+</section>
+
+<div class="lbox" id="lbox" role="dialog" aria-modal="true">
+  <button class="lbox-close" onclick="closeLbox()" aria-label="Close">✕</button>
+  <div class="lbox-inner">
+    <img id="lbox-img" class="lbox-img" src="" alt="">
+    <p class="lbox-cap" id="lbox-cap"></p>
+  </div>
+</div>
+
+<!-- ═══════ FRIENDSHIP API ═══════ -->
+<section id="sec-api" class="sec hidden-sec">
+  <div class="wrap">
+    <div class="api-wrap">
+      <h2 class="sec-title">Checking Friendship Status…</h2>
+      <p class="sec-sub">Because some things are more reliable than any API.</p>
+
+      <button class="btn btn-p" id="api-btn" style="margin:0 auto;display:flex;">
+        ▶ CALL FRIENDSHIP API
+      </button>
+
+      <div class="api-term" id="api-term">
+        <span class="aj" id="aj0"><span class="ap">{</span></span>
+        <span class="aj" id="aj1">  <span class="ak">"friendship_status"</span><span class="ap">:</span> <span class="as">"PERMANENT"</span><span class="ap">,</span></span>
+        <span class="aj" id="aj2">  <span class="ak">"office_connection"</span><span class="ap">:</span> <span class="as">"ENDING"</span><span class="ap">,</span></span>
+        <span class="aj" id="aj3">  <span class="ak">"memories"</span><span class="ap">:</span> <span class="as">"PRESERVED"</span><span class="ap">,</span></span>
+        <span class="aj" id="aj4">  <span class="ak">"future_meetups"</span><span class="ap">:</span> <span class="as">"PENDING"</span><span class="ap">,</span></span>
+        <span class="aj" id="aj5">  <span class="ak">"distance"</span><span class="ap">:</span> <span class="as">"IRRELEVANT"</span><span class="ap">,</span></span>
+        <span class="aj" id="aj6">  <span class="ak">"goodbye"</span><span class="ap">:</span> <span class="ab">false</span></span>
+        <span class="aj" id="aj7"><span class="ap">}</span></span>
+      </div>
+
+      <!-- EDITABLE: API response message -->
+      <div class="api-msg" id="api-msg">
+        <p>Work brought us together, but the memories we created are ours to keep.</p>
+        <p>Our daily office routines might change. We might work on different projects, solve different problems, and follow different paths.</p>
+        <p>But I hope we never stop checking in, sharing our stories, laughing at old memories, and making new ones.</p>
+        <p>Because some connections deserve to last longer than any job.</p>
+        <span class="api-hl">Friendship status: NEVER EXPIRES. ❤️</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ UNNATI ═══════ -->
+<section id="sec-unnati" class="sec hidden-sec">
+  <div class="wrap">
+    <div class="un-wrap">
+      <h2 class="un-title">Not Just a Colleague. Someone Like a Sister. ❤️</h2>
+      <p class="un-sub">// a dedicated message for someone who means more than words can describe</p>
+
+      <div id="un-btn-wrap" style="margin-bottom:32px;">
+        <button class="btn btn-pk" onclick="revealUnnati()">💌 Read the Message</button>
+      </div>
+
+      <!-- EDITABLE: Unnati's personal message -->
+      <div class="un-card" id="un-card" style="display:none;">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <p>Some people enter our lives as colleagues, and somewhere along the way, they become much more than that.</p>
+        <p>You became someone I could genuinely appreciate, care about, and consider close to my heart.</p>
+        <p>Even though we're no longer going to share the same workplace every day, I hope we continue sharing conversations, laughter, advice, and all those little moments that make a friendship special.</p>
+        <p>No job title can define a bond like this, and no last working day can put an end to it.</p>
+        <p>Take care of yourself, keep growing, and never forget that you have a friend cheering for you.</p>
+        <p style="color:var(--txt);font-weight:600;">Different workplaces. Same bond.</p>
+        <p style="color:var(--pink);font-weight:700;">Always stay connected. ❤️</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FINAL COMMIT ═══════ -->
+<section id="sec-final" class="sec hidden-sec">
+  <div class="fin-wrap">
+    <h2 class="sec-title" style="margin-bottom:40px;">THE FINAL COMMIT</h2>
+
+    <div class="com-term" id="com-term">
+      <span class="cl pr" id="cl0">$ git commit -m "friendship-forever"</span>
+      <span class="cl me" id="cl1">[main] commit: friendship-forever</span>
+      <span class="cl me" id="cl2">Author: Your Teammate</span>
+      <span class="cl me" id="cl3">Message: Not goodbye. See you around.</span>
+      <span class="cl me" id="cl4">&nbsp;</span>
+      <span class="cl me" id="cl5">Changes committed:</span>
+      <span class="cl add" id="cl6">+ Memories preserved</span>
+      <span class="cl add" id="cl7">+ Friendship maintained</span>
+      <span class="cl add" id="cl8">+ Future meetups planned</span>
+      <span class="cl rem" id="cl9">- Daily office interactions</span>
+      <span class="cl me"  id="cl10">&nbsp;</span>
+      <span class="cl win" id="cl11">✓ Build status: SUCCESS ❤️</span>
+    </div>
+
+    <h2 class="fin-title">THE PROJECT ENDS.<br>THE FRIENDSHIP DOESN'T.</h2>
+
+    <!-- EDITABLE: Final farewell message -->
+    <div class="fin-msg">
+      <p>Today is your last working day here, but this isn't the end of our story.</p>
+      <p>Thank you for the laughs, the conversations, the little moments, and the memories that made working together special.</p>
+      <p>I'm genuinely happy to see you move forward into a new chapter, even though I'll miss having you around.</p>
+      <p>I hope your next journey brings you exciting opportunities, supportive people, personal growth, and plenty of reasons to smile.</p>
+      <p>We'll have new stories to share, new places to meet, and more memories to create.</p>
+      <p>So don't call this goodbye.</p>
+      <p style="color:var(--purple);font-weight:700;font-size:1.1rem;">Call it a new branch in the same friendship repository. ❤️</p>
+    </div>
+
+    <div class="fin-hl">THE PROJECT ENDS. THE FRIENDSHIP DOESN'T.</div>
+
+    <div class="act-btns">
+      <button class="btn btn-pk" onclick="sendHug()">❤️ SEND A HUG</button>
+      <button class="btn btn-p"  onclick="celebrate()">🎉 CELEBRATE OUR FRIENDSHIP</button>
+      <button class="btn btn-o"  onclick="downloadCard()">📸 TAKE A MEMORY</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer>
+  <p class="ft-built">// Built with HTML, CSS, JavaScript, and a whole lot of friendship.</p>
+  <p class="ft-for">Made especially for Rushikesh &amp; Unnati. ❤️</p>
+
+  <div class="ft-stats">
+    <div class="ft-stat"><span class="ft-lbl">Status</span><span class="ft-val">Friendship Online</span></div>
+    <div class="ft-stat"><span class="ft-lbl">Version</span><span class="ft-val">Forever.0.1</span></div>
+    <div class="ft-stat"><span class="ft-lbl">Last Updated</span><span class="ft-val">Their Last Working Day</span></div>
+  </div>
+
+  <div class="share-box">
+    <p class="share-title">Share with Rushikesh &amp; Unnati</p>
+    <p class="share-note">// Deploy to GitHub Pages, Netlify, or Vercel for a public shareable link.</p>
+    <button class="btn btn-o" onclick="shareIt()" style="margin:0 auto;display:flex;">🔗 Share / Copy Link</button>
+    <div class="share-toast" id="share-toast">✓ URL copied! Deploy to a hosting service to get a public link others can open.</div>
+  </div>
+
+  <div style="margin-top:32px;">
+    <button class="btn btn-o" onclick="window.scrollTo({top:0,behavior:'smooth'})">↺ REPLAY OUR MEMORIES</button>
+  </div>
+</footer>
+
+<canvas id="dl-canvas" width="800" height="450"></canvas>
+
+<script>
+/* ════════════════════════════════════════
+   CONFIGURABLE CONTENT — EDIT HERE
+   ════════════════════════════════════════ */
+
+// Add real photos: set image to a file path or URL, e.g. "photos/team.jpg"
+// Leave image as "" to show a styled placeholder
+const memories = [
+  { name:"Our Team",     image:"", caption:"One team, countless memories.",                              date:"" },
+  { name:"The Good Times",image:"",caption:"A little chaos, a lot of laughter.",                        date:"" },
+  { name:"Together",     image:"", caption:"The people who made ordinary workdays memorable.",           date:"" },
+  { name:"Workdays",     image:"", caption:"Different tasks. Same team. Countless memories.",            date:"" },
+  { name:"Moments",      image:"", caption:"Some of the best moments were never part of the sprint plan.",date:"" },
+  { name:"Legacy",       image:"", caption:"The best things we built weren't always websites.",          date:"" },
+];
+
+/* ════════════════════════════════════════
+   TERMINAL SEQUENCE
+   ════════════════════════════════════════ */
+const lines = [
+  { t:"$ initializing_farewell.exe",                                              c:"cmd",  d:0    },
+  { t:"",                                                                          c:"info", d:400  },
+  { t:"Loading friendship............. DONE",                                      c:"ok",   d:800  },
+  { t:"Collecting memories............. DONE",                                     c:"ok",   d:1400 },
+  { t:"Checking office attendance..... FAILED",                                    c:"err",  d:2000 },
+  { t:"Calculating emotional damage.... CRITICAL",                                 c:"warn", d:2700 },
+  { t:"Verifying friendship status..... PERMANENT",                                c:"ok",   d:3400 },
+  { t:"",                                                                          c:"info", d:4000 },
+  { t:'WARNING: Two legendary humans are about to log out of the office for the last time.', c:"warn", d:4200 },
+  { t:"",                                                                          c:"info", d:5000 },
+  { t:'"Access to the office revoked. Access to our friendship? NEVER."',          c:"final",d:5200 },
+];
+
+(function runTerminal() {
+  const body = document.getElementById('term-body');
+  const cur  = document.getElementById('tcur');
+  lines.forEach((l, i) => {
+    setTimeout(() => {
+      const s = document.createElement('span');
+      s.className = 'tl ' + l.c;
+      s.textContent = l.t;
+      body.insertBefore(s, cur);
+      if (i === lines.length - 1) {
+        setTimeout(() => {
+          const hc = document.getElementById('hero-content');
+          hc.style.opacity = '1';
+          hc.style.transform = 'translateY(0)';
+        }, 900);
+      }
+    }, l.d);
+  });
+})();
+
+/* ════════════════════════════════════════
+   CARD FLIP
+   ════════════════════════════════════════ */
+function flip(id, e) {
+  if (e) e.stopPropagation();
+  document.getElementById(id).classList.toggle('flipped');
+}
+document.getElementById('cw-r').addEventListener('click', function(e) {
+  if (!e.target.closest('.back-btn')) flip('cw-r');
+});
+document.getElementById('cw-u').addEventListener('click', function(e) {
+  if (!e.target.closest('.back-btn')) flip('cw-u');
+});
+
+/* ════════════════════════════════════════
+   START BUTTON
+   ════════════════════════════════════════ */
+document.getElementById('start-btn').addEventListener('click', function() {
+  confetti(80);
+  setTimeout(() => document.getElementById('sec-profiles').scrollIntoView({ behavior:'smooth' }), 500);
+});
+
+/* ════════════════════════════════════════
+   AWARD REVEAL
+   ════════════════════════════════════════ */
+function revealAward(card) {
+  const btn = card.querySelector('.aw-btn');
+  const msg = card.querySelector('.aw-msg');
+  if (msg.classList.contains('show')) return;
+  btn.style.display = 'none';
+  msg.classList.add('show');
+}
+
+/* ════════════════════════════════════════
+   MEMORY WALL
+   ════════════════════════════════════════ */
+const themes = [
+  { bg:'linear-gradient(135deg,#1a1a2e,#16213e)', icon:'📸', col:'#4d9fff' },
+  { bg:'linear-gradient(135deg,#1a0a2e,#0d0d1a)', icon:'🌟', col:'#b66dff' },
+  { bg:'linear-gradient(135deg,#1a0a1a,#2e0a1a)', icon:'❤️', col:'#ff6eb4' },
+  { bg:'linear-gradient(135deg,#0a1a1a,#0a2e1a)', icon:'✨', col:'#00d4ff' },
+  { bg:'linear-gradient(135deg,#1a1a0a,#1a2e0a)', icon:'💫', col:'#ffd700' },
+  { bg:'linear-gradient(135deg,#0a0a1a,#1a0a2e)', icon:'🎉', col:'#b66dff' },
+];
+
+(function buildMemories() {
+  const grid = document.getElementById('mem-grid');
+  memories.forEach((m, i) => {
+    const th = themes[i % themes.length];
+    const div = document.createElement('div');
+    div.className = 'mem-card';
+    div.onclick = () => openLbox(m, i);
+
+    const inner = m.image
+      ? `<img src="${m.image}" alt="${m.name}" loading="lazy" onerror="this.outerHTML=ph(${i})">`
+      : ph(i);
+
+    div.innerHTML = `
+      <div class="mem-img-box">${inner}</div>
+      <div class="mem-cap">
+        <p class="mem-cap-txt">${m.caption}</p>
+        ${m.date ? `<p class="mem-date">${m.date}</p>` : ''}
+      </div>`;
+    grid.appendChild(div);
+  });
+
+  function ph(i) {
+    const t = themes[i % themes.length];
+    return `<div class="mem-ph" style="background:${t.bg}">
+      <span class="mem-ph-icon">${t.icon}</span>
+      <span class="mem-ph-txt" style="color:${t.col}">[ Add your photo here ]</span>
+    </div>`;
+  }
+
+  window.ph = ph;
+})();
+
+function openLbox(m, i) {
+  const lb = document.getElementById('lbox');
+  const img = document.getElementById('lbox-img');
+  if (m.image) { img.src = m.image; img.style.display = 'block'; }
+  else img.style.display = 'none';
+  document.getElementById('lbox-cap').textContent = m.caption;
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLbox() {
+  document.getElementById('lbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('lbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLbox();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLbox(); });
+
+/* ════════════════════════════════════════
+   FRIENDSHIP API
+   ════════════════════════════════════════ */
+let apiDone = false;
+document.getElementById('api-btn').addEventListener('click', function() {
+  if (apiDone) return;
+  apiDone = true;
+  this.disabled = true;
+  this.textContent = '⌛ Loading…';
+  document.getElementById('api-term').style.display = 'block';
+  for (let i = 0; i <= 7; i++) {
+    setTimeout(() => {
+      const el = document.getElementById('aj' + i);
+      if (el) el.classList.add('show');
+      if (i === 7) {
+        setTimeout(() => {
+          document.getElementById('api-msg').classList.add('show');
+          document.getElementById('api-btn').textContent = '✓ API Called Successfully';
+        }, 600);
+      }
+    }, i * 300);
+  }
+});
+
+/* ════════════════════════════════════════
+   UNNATI MESSAGE
+   ════════════════════════════════════════ */
+function revealUnnati() {
+  document.getElementById('un-btn-wrap').style.display = 'none';
+  const c = document.getElementById('un-card');
+  c.style.display = 'block';
+  c.style.animation = 'fiu .8s ease';
+}
+
+/* ════════════════════════════════════════
+   COMMIT ANIMATION
+   ════════════════════════════════════════ */
+let commitDone = false;
+function runCommit() {
+  if (commitDone) return;
+  commitDone = true;
+  for (let i = 0; i <= 11; i++) {
+    setTimeout(() => {
+      const el = document.getElementById('cl' + i);
+      if (el) el.classList.add('show');
+    }, i * 250);
+  }
+}
+
+/* ════════════════════════════════════════
+   HEARTS
+   ════════════════════════════════════════ */
+function sendHug() {
+  const hearts = ['❤️','💖','💗','💝','💕','💞','🤍'];
+  for (let i = 0; i < 22; i++) {
+    setTimeout(() => {
+      const h = document.createElement('div');
+      h.className = 'heart-p';
+      h.textContent = hearts[i % hearts.length];
+      h.style.cssText = `left:${Math.random()*window.innerWidth}px;top:${window.innerHeight*.7}px;font-size:${1+Math.random()*1.5}rem;animation-duration:${1+Math.random()*.8}s;`;
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 2000);
+    }, i * 70);
+  }
+}
+
+/* ════════════════════════════════════════
+   CONFETTI
+   ════════════════════════════════════════ */
+function confetti(n) {
+  const cols = ['#b66dff','#4d9fff','#ff6eb4','#00d4ff','#ffd700','#28c840'];
+  for (let i = 0; i < n; i++) {
+    setTimeout(() => {
+      const p = document.createElement('div');
+      p.className = 'conf-p';
+      p.style.cssText = `
+        left:${Math.random()*window.innerWidth}px;top:-10px;
+        background:${cols[i%cols.length]};
+        width:${6+Math.random()*8}px;height:${6+Math.random()*8}px;
+        border-radius:${Math.random()>.5?'50%':'2px'};
+        animation-duration:${2+Math.random()*3}s;
+      `;
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), 5500);
+    }, i * 28);
+  }
+}
+
+function celebrate() {
+  confetti(120);
+  setTimeout(() => {
+    const msgs = [
+      "To the best teammates a developer could ask for! 🎉",
+      "Cheering for you both — always! ❤️",
+      "New chapter, same friendship. Forever! 🚀"
+    ];
+    const t = document.createElement('div');
+    t.style.cssText = `
+      position:fixed;bottom:40px;left:50%;transform:translateX(-50%);
+      background:linear-gradient(135deg,#b66dff,#4d9fff);
+      color:#fff;padding:16px 32px;border-radius:50px;
+      font-size:1rem;font-weight:600;z-index:9999;
+      animation:fiu .4s ease;box-shadow:0 8px 32px rgba(182,109,255,.4);
+      text-align:center;max-width:90vw;
+    `;
+    t.textContent = msgs[Math.floor(Math.random() * msgs.length)];
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 3500);
+  }, 400);
+}
+
+/* ════════════════════════════════════════
+   DOWNLOAD CARD
+   ════════════════════════════════════════ */
+function downloadCard() {
+  const cv = document.getElementById('dl-canvas');
+  const c  = cv.getContext('2d');
+  const W = 800, H = 450;
+
+  // bg
+  const bg = c.createLinearGradient(0,0,W,H);
+  bg.addColorStop(0,'#0a0a0f'); bg.addColorStop(.5,'#0d0d1a'); bg.addColorStop(1,'#0a0a0f');
+  c.fillStyle = bg; c.fillRect(0,0,W,H);
+
+  // border
+  const bd = c.createLinearGradient(0,0,W,H);
+  bd.addColorStop(0,'#b66dff'); bd.addColorStop(.5,'#4d9fff'); bd.addColorStop(1,'#ff6eb4');
+  c.strokeStyle = bd; c.lineWidth = 3; c.strokeRect(12,12,W-24,H-24);
+
+  // stars
+  c.fillStyle = 'rgba(255,255,255,.6)';
+  for (let i=0;i<60;i++) { c.beginPath(); c.arc(Math.random()*W,Math.random()*H,Math.random()*1.5,0,Math.PI*2); c.fill(); }
+
+  // title
+  const tg = c.createLinearGradient(0,0,W,0);
+  tg.addColorStop(0,'#b66dff'); tg.addColorStop(1,'#4d9fff');
+  c.font='bold 36px Arial,sans-serif'; c.fillStyle=tg; c.textAlign='center';
+  c.fillText('404: Friends Not Found at Office', W/2, 90);
+
+  c.font='18px Arial,sans-serif'; c.fillStyle='rgba(255,255,255,.7)';
+  c.fillText('Two legends are logging out. The friendship? Still online. ❤️', W/2, 130);
+
+  c.strokeStyle='rgba(255,255,255,.12)'; c.lineWidth=1;
+  c.beginPath(); c.moveTo(60,155); c.lineTo(W-60,155); c.stroke();
+
+  c.font='bold 26px Arial,sans-serif';
+  c.fillStyle='#4d9fff'; c.textAlign='left';  c.fillText('👨‍💻 Rushikesh', 80,215);
+  c.fillStyle='#ff6eb4'; c.textAlign='right'; c.fillText('Unnati 👩‍💻', W-80,215);
+
+  c.font='15px Arial,sans-serif'; c.fillStyle='rgba(255,255,255,.8)'; c.textAlign='center';
+  c.fillText('"Not goodbye. Just a new branch in the same friendship repository."', W/2,280);
+
+  c.font='13px Arial,sans-serif'; c.fillStyle='rgba(255,255,255,.4)';
+  c.fillText('Built with HTML, CSS, JavaScript & a whole lot of friendship ❤️', W/2,390);
+  c.fillText('Friendship Status: NEVER EXPIRES', W/2,415);
+
+  const a = document.createElement('a');
+  a.download = 'farewell-rushikesh-unnati.png';
+  a.href = cv.toDataURL('image/png');
+  a.click();
+}
+
+/* ════════════════════════════════════════
+   SHARE
+   ════════════════════════════════════════ */
+function shareIt() {
+  const url = window.location.href;
+  const sd = { title:'404: Friends Not Found at Office ❤️', text:'A farewell website for two legends.', url };
+  if (navigator.share && navigator.canShare && navigator.canShare(sd)) {
+    navigator.share(sd).catch(()=>{});
+  } else {
+    navigator.clipboard.writeText(url).then(() => {
+      const t = document.getElementById('share-toast');
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 4500);
+    }).catch(() => prompt('Copy this link:', url));
+  }
+}
+
+/* ════════════════════════════════════════
+   SCROLL REVEAL
+   ════════════════════════════════════════ */
+const reveals = document.querySelectorAll('.hidden-sec');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('show-sec');
+      e.target.classList.remove('hidden-sec');
+      if (e.target.id === 'sec-final') setTimeout(runCommit, 400);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+reveals.forEach(s => obs.observe(s));
+
+/* ════════════════════════════════════════
+   NAV DOTS
+   ════════════════════════════════════════ */
+const dots    = document.querySelectorAll('.nd');
+const secIds  = ['hero','sec-profiles','sec-awards','sec-memories','sec-api','sec-unnati','sec-final'];
+
+dots.forEach((d, i) => {
+  d.addEventListener('click', () => document.getElementById(secIds[i]).scrollIntoView({ behavior:'smooth' }));
+});
+
+window.addEventListener('scroll', () => {
+  const mid = window.scrollY + window.innerHeight / 2;
+  secIds.forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (el.offsetTop <= mid && el.offsetTop + el.offsetHeight > mid) {
+      dots.forEach(d => d.classList.remove('on'));
+      if (dots[i]) dots[i].classList.add('on');
+    }
+  });
+}, { passive:true });
+
+/* ════════════════════════════════════════
+   PARTICLES
+   ════════════════════════════════════════ */
+(function() {
+  const cv = document.getElementById('stars');
+  const c  = cv.getContext('2d');
+  const cols = ['#b66dff','#4d9fff','#ff6eb4','#00d4ff','#ffffff'];
+  let ps = [], raf;
+
+  function resize() { cv.width = window.innerWidth; cv.height = window.innerHeight; }
+
+  function mkP() {
+    return {
+      x: Math.random() * cv.width,
+      y: Math.random() * cv.height,
+      r: Math.random() * 1.5 + .5,
+      vx: (Math.random() - .5) * .15,
+      vy: -(Math.random() * .25 + .08),
+      a: Math.random() * .6 + .2,
+      col: cols[Math.floor(Math.random() * cols.length)]
+    };
+  }
+
+  function draw() {
+    c.clearRect(0, 0, cv.width, cv.height);
+    ps.forEach((p, i) => {
+      p.x += p.vx; p.y += p.vy; p.a -= .0004;
+      if (p.y < -5 || p.a <= 0) { ps[i] = mkP(); ps[i].y = cv.height + 5; }
+      c.globalAlpha = Math.max(0, p.a);
+      c.fillStyle = p.col;
+      c.beginPath(); c.arc(p.x, p.y, p.r, 0, Math.PI*2); c.fill();
+    });
+    c.globalAlpha = 1;
+    raf = requestAnimationFrame(draw);
+  }
+
+  resize();
+  ps = Array.from({ length: 130 }, mkP);
+  draw();
+  window.addEventListener('resize', resize, { passive:true });
+  document.addEventListener('visibilitychange', () => {
+    document.hidden ? cancelAnimationFrame(raf) : draw();
+  });
+})();
+</script>
+</body>
+</html>
